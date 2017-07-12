@@ -1,0 +1,568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en_US" lang="en_US">
+  <head>
+	 	 <title>plot - 2D plot</title>
+				       <style type="text/css" media="all">
+      @import url("/scilab_code.css");
+      @import url("/css/c_code.css");
+      @import url("/css/xml_code.css");
+      @import url("/style.css") not print;
+      @import url("/print.css") print;
+    </style>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+<!-- Rajouter les metas -->
+
+    <!--[if IE]><![endif]-->
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset={$config['charset']}"/>
+-->
+<link rel="Shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="/js/tooltip.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $("#search").autocomplete(
+	  { source:"/ajaxSearch.php?v=5.5.2",
+            select: function(event, ui) {
+               window.location = ui.item.url;
+            },
+            open: function(event, ui)
+            {
+               $("#search").autocomplete ("widget").css("width","200px");
+            } 
+	   } );
+});
+
+</script>
+
+  </head>
+  <body>
+<!--title=plot--> <!--subtitle=2D plot-->
+<!--generationdate=<span class="generationdate">Wed Apr 01 10:13:56 CEST 2015</span>
+-->
+<div id="global">
+
+  <div id="myHeader">
+
+    <a href="http://www.scilab.org/">Scilab Home page</a> | <a href="http://wiki.scilab.org/">Wiki</a> | <a href="http://bugzilla.scilab.org/">Bug tracker</a> | <a href="http://forge.scilab.org/">Forge</a> | <a href="http://lists.scilab.org">Mailing list archives</a> | <a href="http://atoms.scilab.org/">ATOMS</a> | <a href="http://fileexchange.scilab.org/">File exchange</a>
+
+    <div id="slogan">
+      <a href='/'>Scilab Online Help</a>
+    </div>
+
+    <div id="cadre_help">
+      <script>
+		$(document).ready(function() {
+		var $dialoglogin = $('<div></div>')
+			.html('<form id=\'login\' name=\'login\' action=\'/doc/5.5.2/en_US/plot.html\' method=\'post\'>	<input type=\'hidden\' name=\'action\' value=\'login\'>Email:<br /><input type=\'text\' name=\'form_email\' /><br />Password:<br /><input type=\'password\' name=\'form_password\' /></form>')
+			.dialog({
+				autoOpen: false,
+				title: 'Login',
+				modal: true,
+				buttons: {
+					'Login': function() {
+					document.login.submit();
+					},
+				Cancel: function() {
+					$( this ).dialog( 'close' );
+					}
+				},
+
+			});
+
+		$('#openerlogin').click(function() {
+			$dialoglogin.dialog('open');
+			// prevent the default action, e.g., following a link
+			return false;
+		});
+                $('#openerloginbottom').click(function() {
+                        $dialoglogin.dialog('open');
+                        // prevent the default action, e.g., following a link
+                        return false;
+                });
+
+		var $dialogcreate = $('<div></div>')
+			.html('<form id=\'createAccount\' name=\'createAccount\' action=\'\' method=\'post\'>Email address:<br /><input name=\'form_email\' /><br />Title:<br /><select name=\'form_title\'><option value=\'none\'>- select -</option><option value=\'Mr\'>Mr</option><option value=\'Mrs\'>Mrs</option></select><br />Lastname:<br /><input name=\'form_lastname\' /><br />Firstname:<br /><input name=\'form_firstname\' /><br />Country:<br /><select name=\'form_country\'>   <option value=\'0\' selected=\'selected\'>---------------- Please select a country ----------------</option> 	<option value=\'1\'>Afghanistan</option> 	<option value=\'2\'>Albania</option> 	<option value=\'3\'>Algeria</option> 	<option value=\'4\'>American Samoa</option> 	<option value=\'5\'>Andorra</option> 	<option value=\'6\'>Angola</option> 	<option value=\'7\'>Anguilla</option> 	<option value=\'8\'>Antarctica</option> 	<option value=\'9\'>Antigua And Barbuda</option> 	<option value=\'10\'>Argentina</option> 	<option value=\'11\'>Armenia</option> 	<option value=\'12\'>Aruba</option> 	<option value=\'13\'>Australia</option> 	<option value=\'14\'>Austria</option> 	<option value=\'15\'>Azerbaijan</option> 	<option value=\'16\'>Bahamas</option> 	<option value=\'17\'>Bahrain</option> 	<option value=\'18\'>Bangladesh</option> 	<option value=\'19\'>Barbados</option> 	<option value=\'20\'>Belarus</option> 	<option value=\'21\'>Belgium</option> 	<option value=\'22\'>Belize</option> 	<option value=\'23\'>Benin</option> 	<option value=\'24\'>Bermuda</option> 	<option value=\'25\'>Bhutan</option> 	<option value=\'26\'>Bolivia</option> 	<option value=\'27\'>Bosnia And Herzegowina</option> 	<option value=\'28\'>Botswana</option> 	<option value=\'29\'>Bouvet Island</option> 	<option value=\'30\'>Brazil</option> 	<option value=\'31\'>British Indian Ocean Territory</option> 	<option value=\'32\'>Brunei Darussalam</option> 	<option value=\'33\'>Bulgaria</option> 	<option value=\'34\'>Burkina Faso</option> 	<option value=\'35\'>Burundi</option> 	<option value=\'36\'>Cambodia</option> 	<option value=\'37\'>Cameroon</option> 	<option value=\'38\'>Canada</option> 	<option value=\'39\'>Cape Verde</option> 	<option value=\'40\'>Cayman Islands</option> 	<option value=\'41\'>Central African Republic</option> 	<option value=\'42\'>Chad</option> 	<option value=\'43\'>Chile</option> 	<option value=\'44\'>China</option> 	<option value=\'45\'>Christmas Island</option> 	<option value=\'46\'>Cocos (Keeling) Islands</option> 	<option value=\'47\'>Colombia</option> 	<option value=\'48\'>Comoros</option> 	<option value=\'49\'>Congo</option> 	<option value=\'50\'>Cook Islands</option> 	<option value=\'51\'>Costa Rica</option> 	<option value=\'52\'>Cote D Ivoire</option> 	<option value=\'53\'>Croatia</option> 	<option value=\'54\'>Cuba</option> 	<option value=\'55\'>Cyprus</option> 	<option value=\'56\'>Czech Republic</option> 	<option value=\'57\'>Denmark</option> 	<option value=\'58\'>Djibouti</option> 	<option value=\'59\'>Dominica</option> 	<option value=\'60\'>Dominican Republic</option> 	<option value=\'61\'>East Timor</option> 	<option value=\'62\'>Ecuador</option> 	<option value=\'63\'>Egypt</option> 	<option value=\'64\'>El Salvador</option> 	<option value=\'65\'>Equatorial Guinea</option> 	<option value=\'66\'>Eritrea</option> 	<option value=\'67\'>Estonia</option> 	<option value=\'68\'>Ethiopia</option> 	<option value=\'69\'>Falkland Islands</option> 	<option value=\'70\'>Faroe Islands</option> 	<option value=\'71\'>Fiji</option> 	<option value=\'72\'>Finland</option> 	<option value=\'73\'>France</option> 	<option value=\'74\'>France, Metropolitan</option> 	<option value=\'75\'>French Guiana</option> 	<option value=\'76\'>French Polynesia</option> 	<option value=\'77\'>French Southern Territories</option> 	<option value=\'78\'>Gabon</option> 	<option value=\'79\'>Gambia</option> 	<option value=\'80\'>Georgia</option> 	<option value=\'81\'>Germany</option> 	<option value=\'82\'>Ghana</option> 	<option value=\'83\'>Gibraltar</option> 	<option value=\'84\'>Greece</option> 	<option value=\'85\'>Greenland</option> 	<option value=\'86\'>Grenada</option> 	<option value=\'87\'>Guadeloupe</option> 	<option value=\'88\'>Guam</option> 	<option value=\'89\'>Guatemala</option> 	<option value=\'90\'>Guinea</option> 	<option value=\'91\'>Guinea-Bissau</option> 	<option value=\'92\'>Guyana</option> 	<option value=\'93\'>Haiti</option> 	<option value=\'94\'>Heard And Mc Donald Islands</option> 	<option value=\'95\'>Honduras</option> 	<option value=\'96\'>Hong Kong</option> 	<option value=\'97\'>Hungary</option> 	<option value=\'98\'>Iceland</option> 	<option value=\'99\'>India</option> 	<option value=\'100\'>Indonesia</option> 	<option value=\'101\'>Iran</option> 	<option value=\'102\'>Iraq</option> 	<option value=\'103\'>Ireland</option> 	<option value=\'104\'>Israel</option> 	<option value=\'105\'>Italy</option> 	<option value=\'106\'>Jamaica</option> 	<option value=\'107\'>Japan</option> 	<option value=\'108\'>Jordan</option> 	<option value=\'109\'>Kazakhstan</option> 	<option value=\'110\'>Kenya</option> 	<option value=\'111\'>Kiribati</option> 	<option value=\'114\'>Kuwait</option> 	<option value=\'115\'>Kyrgyzstan</option> 	<option value=\'116\'>Lao Peoples Republic</option> 	<option value=\'117\'>Latvia</option> 	<option value=\'118\'>Lebanon</option> 	<option value=\'119\'>Lesotho</option> 	<option value=\'120\'>Liberia</option> 	<option value=\'121\'>Libyan Arab Jamahiriya</option> 	<option value=\'122\'>Liechtenstein</option> 	<option value=\'123\'>Lithuania</option> 	<option value=\'124\'>Luxembourg</option> 	<option value=\'125\'>Macau</option> 	<option value=\'126\'>Macedonia</option> 	<option value=\'127\'>Madagascar</option> 	<option value=\'128\'>Malawi</option> 	<option value=\'129\'>Malaysia</option> 	<option value=\'130\'>Maldives</option> 	<option value=\'131\'>Mali</option> 	<option value=\'132\'>Malta</option> 	<option value=\'133\'>Marshall Islands</option> 	<option value=\'134\'>Martinique</option> 	<option value=\'135\'>Mauritania</option> 	<option value=\'136\'>Mauritius</option> 	<option value=\'137\'>Mayotte</option> 	<option value=\'138\'>Mexico</option> 	<option value=\'139\'>Micronesia</option> 	<option value=\'140\'>Moldova</option> 	<option value=\'141\'>Monaco</option> 	<option value=\'142\'>Mongolia</option> 	<option value=\'143\'>Montserrat</option> 	<option value=\'144\'>Morocco</option> 	<option value=\'145\'>Mozambique</option> 	<option value=\'146\'>Myanmar</option> 	<option value=\'147\'>Namibia</option> 	<option value=\'148\'>Nauru</option> 	<option value=\'149\'>Nepal</option> 	<option value=\'150\'>Netherlands</option> 	<option value=\'151\'>Netherlands Antilles</option> 	<option value=\'152\'>New Caledonia</option> 	<option value=\'153\'>New Zealand</option> 	<option value=\'154\'>Nicaragua</option> 	<option value=\'155\'>Niger</option> 	<option value=\'156\'>Nigeria</option> 	<option value=\'157\'>Niue</option> 	<option value=\'158\'>Norfolk Island</option> 	<option value=\'112\'>North Korea</option> 	<option value=\'159\'>Northern Mariana Islands</option> 	<option value=\'160\'>Norway</option> 	<option value=\'161\'>Oman</option> 	<option value=\'240\'>Other-Not Shown</option> 	<option value=\'162\'>Pakistan</option> 	<option value=\'163\'>Palau</option> 	<option value=\'164\'>Panama</option> 	<option value=\'165\'>Papua New Guinea</option> 	<option value=\'166\'>Paraguay</option> 	<option value=\'167\'>Peru</option> 	<option value=\'168\'>Philippines</option> 	<option value=\'169\'>Pitcairn</option> 	<option value=\'170\'>Poland</option> 	<option value=\'171\'>Portugal</option> 	<option value=\'172\'>Puerto Rico</option> 	<option value=\'173\'>Qatar</option> 	<option value=\'174\'>Reunion</option> 	<option value=\'175\'>Romania</option> 	<option value=\'176\'>Russian Federation</option> 	<option value=\'177\'>Rwanda</option> 	<option value=\'178\'>Saint Kitts And Nevis</option> 	<option value=\'179\'>Saint Lucia</option> 	<option value=\'180\'>Saint Vincent And The Grenadines</option> 	<option value=\'181\'>Samoa</option> 	<option value=\'182\'>San Marino</option> 	<option value=\'183\'>Sao Tome And Principe</option> 	<option value=\'184\'>Saudi Arabia</option> 	<option value=\'185\'>Senegal</option> 	<option value=\'186\'>Seychelles</option> 	<option value=\'187\'>Sierra Leone</option> 	<option value=\'188\'>Singapore</option> 	<option value=\'189\'>Slovakia</option> 	<option value=\'190\'>Slovenia</option> 	<option value=\'191\'>Solomon Islands</option> 	<option value=\'192\'>Somalia</option> 	<option value=\'193\'>South Africa</option> 	<option value=\'194\'>South Georgia</option> 	<option value=\'113\'>South Korea</option> 	<option value=\'196\'>Spain</option> 	<option value=\'197\'>Sri Lanka</option> 	<option value=\'198\'>St Helena</option> 	<option value=\'199\'>St Pierre and Miquelon</option> 	<option value=\'200\'>Sudan</option> 	<option value=\'201\'>Suriname</option> 	<option value=\'202\'>Svalbard And Jan Mayen Islands</option> 	<option value=\'203\'>Swaziland</option> 	<option value=\'204\'>Sweden</option> 	<option value=\'205\'>Switzerland</option> 	<option value=\'206\'>Syrian Arab Republic</option> 	<option value=\'207\'>Taiwan</option> 	<option value=\'208\'>Tajikistan</option> 	<option value=\'209\'>Tanzania</option> 	<option value=\'210\'>Thailand</option> 	<option value=\'195\'>The South Sandwich Islands</option> 	<option value=\'211\'>Togo</option> 	<option value=\'212\'>Tokelau</option> 	<option value=\'213\'>Tonga</option> 	<option value=\'214\'>Trinidad And Tobago</option> 	<option value=\'215\'>Tunisia</option> 	<option value=\'216\'>Turkey</option> 	<option value=\'217\'>Turkmenistan</option> 	<option value=\'218\'>Turks And Caicos Islands</option> 	<option value=\'219\'>Tuvalu</option> 	<option value=\'220\'>Uganda</option> 	<option value=\'221\'>Ukraine</option> 	<option value=\'222\'>United Arab Emirates</option> 	<option value=\'223\'>United Kingdom</option> 	<option value=\'224\'>United States</option> 	<option value=\'226\'>Uruguay</option> 	<option value=\'225\'>US Minor Outlying Islands</option> 	<option value=\'227\'>Uzbekistan</option> 	<option value=\'228\'>Vanuatu</option> 	<option value=\'229\'>Vatican City State</option> 	<option value=\'230\'>Venezuela</option> 	<option value=\'231\'>Viet Nam</option> 	<option value=\'232\'>Virgin Islands (British)</option> 	<option value=\'233\'>Virgin Islands (U.S.)</option> 	<option value=\'234\'>Wallis And Futuna Islands</option> 	<option value=\'235\'>Western Sahara</option> 	<option value=\'236\'>Yemen</option> 	<option value=\'237\'>Zaire</option> 	<option value=\'238\'>Zambia</option> 	<option value=\'239\'>Zimbabwe</option> </select><br />Organization:<br /><input name=\'form_organization\' /><br />Password:<br /><input name=\'form_password_1\' type=\'password\' /><br />Validate password:<br /><input name=\'form_password_2\' type=\'password\' /><input name=\'action\' type=\'hidden\' value=\'create_account\'></form>')
+			.dialog({
+				autoOpen: false,
+				title: 'Create Scilab account',
+				buttons: {
+					'Create account': function() {
+					document.createAccount.submit();
+					},
+				Cancel: function() {
+					$( this ).dialog( 'close' );
+					}
+                    },
+			});
+
+		$('#openercreate').click(function() {
+			$dialogcreate.dialog('open');
+			// prevent the default action, e.g., following a link
+			return false;
+		});
+		});
+		</script>Please <a href='' id='openerlogin'>login</a> or <a href='' id='openercreate'>create an account</a><br />
+      <form name='f1' method='POST' action='/docs/5.5.2/en_US/search/'><input type='input' name='search' id='search' value='' autocomplete='off'/><input type='hidden' name='page_id'><input type='submit' id='searchbutton' value='Search'/></form>
+    </div>
+  </div>
+
+  <div id="mainArea">
+
+    <div id="myLeftArea">
+      <div class="title">
+        <span class="version">Scilab 5.5.2</span>
+
+      </div>
+      <ul class="toc">
+<li class="root"><a href="index.html">Scilab Help</a></li>
+<li class="parent"><a href="section_fbb832a4db5f8ce05fb634eec24fa41c.html">Graphics</a></li>
+<li class="parent"><a href="section_2ffb0b90d70b48bab28bd7dcd2267872.html">2d_plot</a></li>
+<li><a href="LineSpec.html">LineSpec</a></li>
+<li><a href="Matplot.html">Matplot</a></li>
+<li><a href="Matplot1.html">Matplot1</a></li>
+<li><a href="Matplot_properties.html">Matplot properties</a></li>
+<li><a href="Sfgrayplot.html">Sfgrayplot</a></li>
+<li><a href="Sgrayplot.html">Sgrayplot</a></li>
+<li><a href="champ.html">champ</a></li>
+<li><a href="champ1.html">champ1</a></li>
+<li><a href="champ_properties.html">champ properties</a></li>
+<li><a href="comet.html">comet</a></li>
+<li><a href="contour2d.html">contour2d</a></li>
+<li><a href="contour2di.html">contour2di</a></li>
+<li><a href="contour2dm.html">contour2dm</a></li>
+<li><a href="contourf.html">contourf</a></li>
+<li><a href="errbar.html">errbar</a></li>
+<li><a href="fchamp.html">fchamp</a></li>
+<li><a href="fcontour2d.html">fcontour2d</a></li>
+<li><a href="fec.html">fec</a></li>
+<li><a href="fec_properties.html">fec properties</a></li>
+<li><a href="fgrayplot.html">fgrayplot</a></li>
+<li><a href="fplot2d.html">fplot2d</a></li>
+<li><a href="grayplot.html">grayplot</a></li>
+<li><a href="grayplot_properties.html">grayplot properties</a></li>
+<li><a href="graypolarplot.html">graypolarplot</a></li>
+<li><a href="histplot.html">histplot</a></li>
+<li><a href="paramfplot2d.html">paramfplot2d</a></li>
+<li class="list-active"><a href="plot.html">plot</a></li>
+<li><a href="plot2d.html">plot2d</a></li>
+<li><a href="plot2d1.html">plot2d1</a></li>
+<li><a href="plot2d2.html">plot2d2</a></li>
+<li><a href="plot2d3.html">plot2d3</a></li>
+<li><a href="plot2d4.html">plot2d4</a></li>
+<li><a href="polarplot.html">polarplot</a></li>
+</ul>
+
+    </div>
+
+
+    <div id="myMiddleArea">
+
+      <div class="editbar">
+        <div class="selectlanguage">
+          Change language to: <a href='/docs/5.5.2/fr_FR/plot.html'>Français</a>  - <a href='/docs/5.5.2/pt_BR/plot.html'>Português</a>  - <a href='/docs/5.5.2/ru_RU/plot.html'>Русский</a>  - <a href='/docs/5.5.2/ja_JP/plot.html'>日本語</a> 
+        </div>
+
+        <div class="favorite">
+          <!--favorite-->
+        </div>
+      </div>
+      <p class='deprecated'>
+		       <span class='versionmodified'>Please note that the recommended version of Scilab is 6.0.0. This page might be outdated.<br /><a href='/docs/6.0.0/en_US/plot.html'>See the recommended documentation of this function</a></span></p><span class="path"><a href="index.html">Scilab Help</a> &gt;&gt; <a href="section_fbb832a4db5f8ce05fb634eec24fa41c.html">Graphics</a> &gt; <a href="section_2ffb0b90d70b48bab28bd7dcd2267872.html">2d_plot</a> &gt; plot</span>
+
+      <br />
+      <div class="refnamediv"><h1 class="refname">plot</h1>
+        <p class="refpurpose">2D plot</p></div>
+    <div class="refsynopsisdiv"><h3 class="title">Calling Sequence</h3>
+        <div class="synopsis"><pre><span class="functionid">plot</span><span class="default">(</span><span class="default">y</span><span class="default">,</span>&lt;<span class="default">LineSpec</span>&gt;<span class="default">,</span>&lt;<span class="default">GlobalProperty</span>&gt;<span class="default">)</span>
+<span class="functionid">plot</span><span class="default">(</span><span class="default">x</span><span class="default">,</span><span class="default">y</span><span class="default">,</span>&lt;<span class="default">LineSpec</span>&gt;<span class="default">,</span>&lt;<span class="default">GlobalProperty</span>&gt;<span class="default">)</span>
+<span class="functionid">plot</span><span class="default">(</span><span class="default">x1</span><span class="default">,</span><span class="default">y1</span><span class="default">,</span>&lt;<span class="default">LineSpec1</span>&gt;<span class="default">,</span><span class="default">x2</span><span class="default">,</span><span class="default">y2</span><span class="default">,</span>&lt;<span class="default">LineSpec2</span>&gt;<span class="default">,...</span><span class="default">xN</span><span class="default">,</span><span class="default">yN</span><span class="default">,</span>&lt;<span class="default">LineSpecN</span>&gt;<span class="default">,</span>&lt;<span class="default">GlobalProperty1</span>&gt;<span class="default">,</span>&lt;<span class="default">GlobalProperty2</span>&gt;<span class="default">,..</span>&lt;<span class="default">GlobalPropertyM</span>&gt;<span class="default">)</span>
+<span class="functionid">plot</span><span class="default">(</span>&lt;<span class="default">axes_handle</span>&gt;<span class="default">,...)</span></pre></div></div>
+    <div class="refsection"><h3 class="title">Arguments</h3>
+        <dl><dt><span class="term">x</span>
+                <dd><p class="para">a real matrix or vector. If omitted, it is assumed to be the
+                        vector <code class="literal">1:n</code> where <code class="literal">n</code> is the number of curve
+                        points given by the <code class="literal">y</code> parameter.</p></dd></dt>
+            <dt><span class="term">y</span>
+                <dd><p class="para">a real matrix or vector. <code class="literal">y</code> can also be a
+                        function defined as a macro or a primitive.</p></dd></dt>
+            <dt><span class="term">&lt;LineSpec&gt;</span>
+                <dd><p class="para">This optional argument must be a string that will be used as a
+                        shortcut to specify a way of drawing a line. We can have one
+                        <code class="literal">LineSpec</code> per <code class="literal">y</code> or <code class="literal">{x,y}</code>
+                        previously entered. <code class="literal">LineSpec</code> options deals with
+                        LineStyle, Marker and Color specifiers (see <a href="LineSpec.html" class="link">LineSpec</a>).
+                        Those specifiers determine the line style, mark style and color of
+                        the plotted lines.</p></dd></dt>
+            <dt><span class="term">&lt;GlobalProperty&gt;</span>
+                <dd><p class="para">This optional argument represents a sequence of couple
+                        statements <code class="literal">{PropertyName,PropertyValue}</code> that defines
+                        global objects&#0039; properties applied to all the curves created by this
+                        plot. For a complete view of the available properties (see
+                        <a href="GlobalProperty.html" class="link">GlobalProperty</a>).</p></dd></dt>
+            <dt><span class="term">&lt;axes_handle&gt;</span>
+                <dd><p class="para">This optional argument forces the plot to appear inside the
+                        selected axes given by <code class="literal">axes_handle</code> rather than the
+                        current axes (see <a href="gca.html" class="link">gca</a>).</p></dd></dt></dl></div>
+    <div class="refsection"><h3 class="title">Description</h3>
+        <p class="para"><code class="literal">plot</code> plots a set of 2D curves. <code class="literal">plot</code> has been
+            rebuild to better handle Matlab syntax. To improve graphical
+            compatibility, Matlab users should use <code class="literal">plot</code> (rather than
+            <a href="plot2d.html" class="link">plot2d</a>).</p>
+        <p class="para">Data entry specification :</p>
+        <p class="para">In this paragraph and to be more clear, we won&#0039;t mention
+            <code class="literal">LineSpec</code> nor <code class="literal">GlobalProperty</code> optional arguments
+            as they do not interfer with entry data (except for <code class="literal">&#0034;Xdata&#0034;</code>,
+            <code class="literal">&#0034;Ydata&#0034;</code> and <code class="literal">&#0034;Zdata&#0034;</code> property, see
+            <a href="GlobalProperty.html" class="link">GlobalProperty</a>). It is assumed that all those optional
+            arguments could be present too.</p>
+        <p class="para">If <code class="literal">y</code> is a vector, plot(y) plots vector <code class="literal">y</code>
+            versus vector <code class="literal">1:size(y,&#0039;*&#0039;)</code>.</p>
+        <p class="para">If <code class="literal">y</code> is a matrix, plot(y) plots each columns of
+            <code class="literal">y</code> versus vector <code class="literal">1:size(y,1)</code>.</p>
+        <p class="para">If <code class="literal">x</code> and <code class="literal">y</code> are vectors, plot(x,y) plots
+            vector <code class="literal">y</code> versus vector <code class="literal">x</code>. <code class="literal">x</code> and
+            <code class="literal">y</code> vectors should have the same number of entries.</p>
+        <p class="para">If <code class="literal">x</code> is a vector and <code class="literal">y</code> a matrix plot(x,y)
+            plots each columns of <code class="literal">y</code> versus vector <code class="literal">x</code>. In this
+            case the number of columns of <code class="literal">y</code> should be equal to the number
+            of <code class="literal">x</code> entries.</p>
+        <p class="para">If <code class="literal">x</code> and <code class="literal">y</code> are matrices, plot(x,y) plots each
+            columns of <code class="literal">y</code> versus corresponding column of <code class="literal">x</code>.
+            In this case the <code class="literal">x</code> and <code class="literal">y</code> sizes should be the
+            same.</p>
+        <p class="para">Finally, if only <code class="literal">x</code> or <code class="literal">y</code> is a matrix, the
+            vector is plotted versus the rows or columns of the matrix. The choice is
+            made depending on whether the vector&#0039;s row or column dimension matches the
+            matrix row or column dimension. In case of a square matrix (on
+            <code class="literal">x</code> or <code class="literal">y</code> only), priority is given to columns
+            rather than lines (see examples below).</p>
+        <p class="para"><table><tr><td valign="top"><img src="ScilabWarning.png"/></td><td valign="top"><div class="warning">When it is necessary and possible, <code class="literal">plot</code> transposes <code class="literal">x</code> and <code class="literal">y</code>,
+                to get compatible dimensions; a warning is then issued. For instance,
+                when <code class="literal">x</code> has as many rows as <code class="literal">y</code> has columns.
+                If <code class="literal">y</code> is square, it is never transposed.</div></td></tr></table></p>
+        <p class="para"><code class="literal">y</code> can also be a function defined as a macro or a
+            primitive. In this case, <code class="literal">x</code> data must be given (as a vector or
+            matrix) and the corresponding computation <code class="literal">y(x)</code> is done
+            implicitly.</p>
+        <p class="para">The <code class="literal">LineSpec</code> and <code class="literal">GlobalProperty</code> arguments
+            sould be used to customize the plot. Here is a complete list of the
+            available options.</p>
+        <dl><dt><span class="term">LineSpec</span>
+                <dd><p class="para">This option may be used to specify, in a short and easy manner,
+                        how the curves are drawn. It must always be a string containing
+                        references to LineStyle, Marker and Color specifiers.</p>
+                    <p class="para">These references must be set inside the string (order is not
+                        important) in an unambiguous way. For example, to specify a red
+                        long-dashed line with the diamond mark enabled, you can write :
+                        <code class="literal">&#0039;r--d&#0039;</code> or <code class="literal">&#0039;--dire&#0039;</code> or
+                        <code class="literal">&#0039;--reddiam&#0039;</code> or another unambiguous statement... or to be
+                        totally complete <code class="literal">&#0039;diamondred--&#0039;</code> (see
+                        <a href="LineSpec.html" class="link">LineSpec</a>).</p>
+                    <p class="para">Note that the line style and color, marks color (and sizes) can
+                        also be (re-)set through the polyline entity properties (see
+                        <a href="polyline_properties.html" class="link">polyline_properties</a>).</p></dd></dt>
+            <dt><span class="term">GlobalProperty</span>
+                <dd><p class="para">This option may be used to specify how all the curves are
+                        plotted using more option than via <code class="literal">LineSpec</code>. It must
+                        always be a couple statement constituted of a string defining the
+                        <code class="literal">PropertyName</code>, and its associated value
+                        <code class="literal">PropertyValue</code> (which can be a string or an integer or...
+                        as well depending on the type of the <code class="literal">PropertyName</code>). Using
+                        <code class="literal">GlobalProperty</code>, you can set multiple properties : every
+                        properties available via LineSpec and more : the marker color
+                        (foreground and background), the visibility, clipping and thickness of
+                        the curves. (see <a href="GlobalProperty.html" class="link">GlobalProperty</a>)</p>
+                    <p class="para">Note that all these properties can be (re-)set through the
+                        polyline entity properties (see <a href="polyline_properties.html" class="link">polyline_properties</a>).</p></dd></dt></dl></div>
+    <div class="refsection"><h3 class="title">Remarks</h3>
+        <p class="para">By default, successive plots are superposed. To clear the previous
+            plot, use <code class="literal">clf()</code>. To enable <code class="literal">auto_clear</code> mode as
+            the default mode, edit your default axes doing:</p>
+        <p class="para">da=gda();</p>
+        <p class="para">da.auto_clear = &#0039;on&#0039;</p>
+        <p class="para">For a better display <code class="literal">plot</code> function may modify the <code class="literal">box</code> property of
+            its parent Axes. This happens when the parent Axes were created by the call to <code class="literal">plot</code> or were empty
+            before the call. If one of the axis is centered at origin,
+            the box is disabled.
+            Otherwise, the box is enabled.</p>
+        <p class="para">For more information about box property and axis positionning see <a href="axes_properties.html" class="link">axes_properties</a></p>
+        <p class="para">A default color table is used to color plotted curves if you do not
+            specify a color. When drawing multiple lines, the plot command
+            automatically cycles through this table. Here are the used colors:</p>
+        <table class="informaltable" border="1"><tr><td><code class="literal">R</code></td>
+                <td><code class="literal">G</code></td>
+                <td><code class="literal">B</code></td></tr>
+            <tr><td>0.</td>
+                <td>0.</td>
+                <td>1.</td></tr>
+            <tr><td>0.</td>
+                <td>0.5</td>
+                <td>0.</td></tr>
+            <tr><td>1.</td>
+                <td>0.</td>
+                <td>0.</td></tr>
+            <tr><td>0.</td>
+                <td>0.75</td>
+                <td>0.75</td></tr>
+            <tr><td>0.75</td>
+                <td>0.</td>
+                <td>0.75</td></tr>
+            <tr><td>0.75</td>
+                <td>0.75</td>
+                <td>0.</td></tr>
+            <tr><td>0.25</td>
+                <td>0.25</td>
+                <td>0.25</td></tr></table>
+        <p class="para"></p>
+        <p class="para">Enter the command <code class="literal">plot</code> to see a demo.</p></div>
+    <div class="refsection"><h3 class="title">Examples</h3>
+        <div class="programlisting"><pre class="scilabcode"><span class="scilabcomment">// x initialisation</span>
+<span class="scilabid">x</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">0</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilaboperator">*</span><span class="scilabconstants">%pi</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">;</span>
+<span class="scilabcomment">//simple plot</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span></pre></div>
+        <div rel='tooltip' title='x=[0:0.1:2*%pi]&#039;;<br />            plot(sin(x))'><img src='/docs/5.5.2/en_US/plot_1.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span>
+<span class="scilabid">x</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">0</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilaboperator">*</span><span class="scilabconstants">%pi</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span></pre></div>
+        <div rel='tooltip' title='x=[0:0.1:2*%pi]&#039;;<br />            plot(x,sin(x))'><img src='/docs/5.5.2/en_US/plot_2.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span>
+<span class="scilabcomment">//multiple plot</span>
+<span class="scilabid">x</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">0</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilaboperator">*</span><span class="scilabconstants">%pi</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabopenclose">)</span> <a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabnumber">2</span><span class="scilaboperator">*</span><span class="scilabid">x</span><span class="scilabopenclose">)</span> <a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabnumber">3</span><span class="scilaboperator">*</span><span class="scilabid">x</span><span class="scilabopenclose">)</span><span class="scilabopenclose">]</span><span class="scilabopenclose">)</span></pre></div>
+        <div rel='tooltip' title='x=[0:0.1:2*%pi]&#039;;<br />            plot(x,[sin(x) sin(2*x) sin(3*x)])'><img src='/docs/5.5.2/en_US/plot_3.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span>
+<span class="scilabid">x</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">0</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilaboperator">*</span><span class="scilabconstants">%pi</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">;</span>
+<span class="scilabcomment">// axis on the right</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span>
+<span class="scilabid">a</span><span class="scilaboperator">=</span><a class="scilabmacro" href="gca.html">gca</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">// Handle on current axes entity</span>
+<span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">y_location</span> <span class="scilaboperator">=</span><span class="scilabstring">&#0034;</span><span class="scilabstring">right</span><span class="scilabstring">&#0034;</span><span class="scilabdefault">;</span>
+<a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span></pre></div>
+        <div rel='tooltip' title='x=[0:0.1:2*%pi]&#039;;<br />            plot(x,sin(x))<br />            a=gca();<br />            a.y_location =&quot;right&quot;;'><img src='/docs/5.5.2/en_US/plot_4.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><span class="scilabid">x</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">0</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilaboperator">*</span><span class="scilabconstants">%pi</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">;</span>
+<span class="scilabcomment">// axis centered at (0,0)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilaboperator">-</span><span class="scilabnumber">4</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabopenclose">)</span><span class="scilabdefault">,</span><span class="scilabid">x</span><span class="scilaboperator">+</span><span class="scilabnumber">2</span><span class="scilabdefault">,</span><a class="scilabcommand" href="cos.html">cos</a><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span>
+<span class="scilabid">a</span><span class="scilaboperator">=</span><a class="scilabmacro" href="gca.html">gca</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">// Handle on axes entity</span>
+<span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">x_location</span> <span class="scilaboperator">=</span> <span class="scilabstring">&#0034;</span><span class="scilabstring">origin</span><span class="scilabstring">&#0034;</span><span class="scilabdefault">;</span>
+<span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">y_location</span> <span class="scilaboperator">=</span> <span class="scilabstring">&#0034;</span><span class="scilabstring">origin</span><span class="scilabstring">&#0034;</span><span class="scilabdefault">;</span>
+
+<span class="scilabcomment">// Some operations on entities created by plot ...</span>
+<span class="scilabid">a</span><span class="scilaboperator">=</span><a class="scilabmacro" href="gca.html">gca</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">isoview</span><span class="scilaboperator">=</span><span class="scilabstring">&#0039;</span><span class="scilabstring">on</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">;</span>
+<span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">children</span> <span class="scilabcomment">// list the children of the axes : here it is an Compound child composed of 2 entities</span>
+<span class="scilabid">poly1</span><span class="scilaboperator">=</span> <span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">children</span><span class="scilaboperator">.</span><span class="scilabfield">children</span><span class="scilabopenclose">(</span><span class="scilabnumber">2</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">//store polyline handle into poly1</span>
+<span class="scilabid">poly1</span><span class="scilaboperator">.</span><span class="scilabfield">foreground</span> <span class="scilaboperator">=</span> <span class="scilabnumber">4</span><span class="scilabdefault">;</span> <span class="scilabcomment">// another way to change the style...</span>
+<span class="scilabid">poly1</span><span class="scilaboperator">.</span><span class="scilabfield">thickness</span> <span class="scilaboperator">=</span> <span class="scilabnumber">3</span><span class="scilabdefault">;</span>  <span class="scilabcomment">// ...and the tickness of a curve.</span>
+<span class="scilabid">poly1</span><span class="scilaboperator">.</span><span class="scilabfield">clip_state</span><span class="scilaboperator">=</span><span class="scilabstring">&#0039;</span><span class="scilabstring">off</span><span class="scilabstring">&#0039;</span> <span class="scilabcomment">// clipping control</span>
+<span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">isoview</span><span class="scilaboperator">=</span><span class="scilabstring">&#0039;</span><span class="scilabstring">off</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">;</span></pre></div>
+        <div rel='tooltip' title='x=[0:0.1:2*%pi]&#039;;<br />            plot(x-4,sin(x),x+2,cos(x))<br />            a=gca();<br />            a.x_location = &quot;origin&quot;;<br />            a.y_location = &quot;origin&quot;;<br />            <br />            a=gca();<br />            a.isoview=&#039;on&#039;;<br />            a.children<br />            poly1= a.children.children(2);<br />            poly1.foreground = 4;<br />            poly1.thickness = 3;<br />            poly1.clip_state=&#039;off&#039;<br />            a.isoview=&#039;off&#039;;'><img src='/docs/5.5.2/en_US/plot_5.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><span class="scilabcomment">//LineSpec and GlobalProperty examples:</span>
+<a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilabnumber">0</span><span class="scilabspecial">:</span><span class="scilabconstants">%pi</span><span class="scilaboperator">/</span><span class="scilabnumber">20</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilaboperator">*</span><span class="scilabconstants">%pi</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">ro-</span><span class="scilabstring">.</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabid">t</span><span class="scilabdefault">,</span><a class="scilabcommand" href="cos.html">cos</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">cya+</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabid">t</span><span class="scilabdefault">,</span><a class="scilabcommand" href="abs.html">abs</a><span class="scilabopenclose">(</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">--mo</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span>
+<a class="scilabmacro" href="scf.html">scf</a><span class="scilabopenclose">(</span><span class="scilabnumber">2</span><span class="scilabopenclose">)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabopenclose">[</span><span class="scilabid">t</span> <span class="scilabdefault">;</span><span class="scilabid">t</span><span class="scilabopenclose">]</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span> <span class="scilabdefault">;</span><a class="scilabcommand" href="cos.html">cos</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabopenclose">]</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">xdat</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilabopenclose">]</span><span class="scilabopenclose">)</span>
+<a class="scilabmacro" href="scf.html">scf</a><span class="scilabopenclose">(</span><span class="scilabnumber">3</span><span class="scilabopenclose">)</span>
+<span class="scilabid">axfig3</span> <span class="scilaboperator">=</span> <a class="scilabmacro" href="gca.html">gca</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<a class="scilabmacro" href="scf.html">scf</a><span class="scilabopenclose">(</span><span class="scilabnumber">4</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// should remain blank</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">axfig3</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabid">t</span> <span class="scilabdefault">;</span><span class="scilabid">t</span><span class="scilabopenclose">]</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span> <span class="scilabdefault">;</span><a class="scilabcommand" href="cos.html">cos</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabopenclose">]</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">zdat</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span><span class="scilabspecial">:</span><span class="scilabnumber">2</span><span class="scilabopenclose">]</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">marker</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">d</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">markerfac</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">green</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">markeredg</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">yel</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span>
+<a class="scilabcommand" href="xdel.html">xdel</a><span class="scilabopenclose">(</span><a class="scilabcommand" href="winsid.html">winsid</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span></pre></div>
+        <div rel='tooltip' title='t=0:%pi/20:2*%pi;<br />            plot(t,sin(t),&#039;ro-.&#039;,t,cos(t),&#039;cya+&#039;,t,abs(sin(t)),&#039;--mo&#039;)<br />            scf(2)<br />            plot([t ;t],[sin(t) ;cos(t)],&#039;xdat&#039;,[1:2])<br />            scf(3)<br />            axfig3 = gca();<br />            scf(4) // should remain blank<br />            plot(axfig3,[t ;t],[sin(t) ;cos(t)],&#039;zdat&#039;,[1:2],&#039;marker&#039;,&#039;d&#039;,&#039;markerfac&#039;,&#039;green&#039;,&#039;markeredg&#039;,&#039;yel&#039;)'><img src='/docs/5.5.2/en_US/plot_6.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><span class="scilabcomment">//Data specification</span>
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilaboperator">-</span><span class="scilabconstants">%pi</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabconstants">%pi</span><span class="scilabdefault">;</span>
+<a class="scilabcommand" href="size.html">size</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// simply plots y versus t vector size</span></pre></div>
+        <div rel='tooltip' title='t=-%pi:0.1:%pi;<br />            size(t)<br />            plot(t)'><img src='/docs/5.5.2/en_US/plot_7.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">// clear figure</span>
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilaboperator">-</span><span class="scilabconstants">%pi</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabconstants">%pi</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">// plots sin(t) versus t</span></pre></div>
+        <div rel='tooltip' title='t=-%pi:0.1:%pi;<br />            plot(t,sin(t));'><img src='/docs/5.5.2/en_US/plot_8.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>
+   <span class="scilabnumber">2</span>     <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>
+   <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>
+   <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>     <span class="scilabnumber">7</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// plots each t column versus row size</span></pre></div>
+        <div rel='tooltip' title='t=[1     1     1     1<br />            2     3     4     5<br />            3     4     5     6<br />            4     5     6     7];<br />            <br />            plot(t) // plots each t column versus row size'><img src='/docs/5.5.2/en_US/plot_9.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>
+   <span class="scilabnumber">2</span>     <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>
+   <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>
+   <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>     <span class="scilabnumber">7</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">221</span><span class="scilabopenclose">)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">// plots sin(t) versus t column by column this time</span>
+<a class="scilabcommand" href="xtitle.html">xtitle</a><span class="scilabopenclose">(</span><span class="scilabstring">&#0034;</span><span class="scilabstring">sin(t) versus t</span><span class="scilabstring">&#0034;</span><span class="scilabopenclose">)</span>
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">222</span><span class="scilabopenclose">)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span>
+<a class="scilabcommand" href="xtitle.html">xtitle</a><span class="scilabopenclose">(</span><span class="scilabstring">&#0034;</span><span class="scilabstring">sin(t)'' versus t</span><span class="scilabstring">&#0034;</span><span class="scilabopenclose">)</span>
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">223</span><span class="scilabopenclose">)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span>
+<span class="scilabid">a</span><span class="scilaboperator">=</span><a class="scilabmacro" href="gca.html">gca</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">a</span><span class="scilaboperator">.</span><span class="scilabfield">data_bounds</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">0</span> <span class="scilaboperator">-</span><span class="scilabnumber">1</span><span class="scilabdefault">;</span><span class="scilabnumber">7</span> <span class="scilabnumber">1</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span> <span class="scilabcomment">// to see the vertical line hiddden by the y axis</span>
+<a class="scilabcommand" href="xtitle.html">xtitle</a><span class="scilabopenclose">(</span><span class="scilabstring">&#0034;</span><span class="scilabstring">sin(t) versus t''</span><span class="scilabstring">&#0034;</span><span class="scilabopenclose">)</span>
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">224</span><span class="scilabopenclose">)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span>
+<a class="scilabcommand" href="xtitle.html">xtitle</a><span class="scilabopenclose">(</span><span class="scilabstring">&#0034;</span><span class="scilabstring">sin(t)'' versus t''</span><span class="scilabstring">&#0034;</span><span class="scilabopenclose">)</span></pre></div>
+        <div rel='tooltip' title='t=[1     1     1     1<br />            2     3     4     5<br />            3     4     5     6<br />            4     5     6     7];<br />            <br />            subplot(221)<br />            plot(t,sin(t)); // plots sin(t) versus t column by column this time<br />            xtitle(&quot;sin(t) versus t&quot;)<br />            subplot(222)<br />            plot(t,sin(t)&#039;)<br />            xtitle(&quot;sin(t)&#039;&#039; versus t&quot;)<br />            subplot(223)<br />            plot(t&#039;,sin(t))<br />            a=gca();<br />            a.data_bounds=[0 -1;7 1]; // to see the vertical line hiddden by the y axis<br />            xtitle(&quot;sin(t) versus t&#039;&#039;&quot;)<br />            subplot(224)<br />            plot(t&#039;,sin(t)&#039;)<br />            xtitle(&quot;sin(t)&#039;&#039; versus t&#039;&#039;&quot;)'><img src='/docs/5.5.2/en_US/plot_10.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>
+   <span class="scilabnumber">2</span>     <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>
+   <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>
+   <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>     <span class="scilabnumber">7</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+
+<span class="scilabcomment">//Special case 1</span>
+<span class="scilabcomment">//x : vector ([5 6 7 8]) and y : matrix (t)</span>
+<span class="scilabid">x</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">5</span> <span class="scilabnumber">6</span> <span class="scilabnumber">7</span> <span class="scilabnumber">8</span><span class="scilabopenclose">]</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabdefault">,</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">,</span><span class="scilabid">t</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">// idem, x is automatically transposed to match t (here the columns)</span></pre></div>
+        <div rel='tooltip' title='t=[1     1     1     1<br />            2     3     4     5<br />            3     4     5     6<br />            4     5     6     7];<br />            <br />            x=[5 6 7 8];<br />            plot(x&#039;,t);'><img src='/docs/5.5.2/en_US/plot_11.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span>
+<span class="scilabid">x</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">5</span> <span class="scilabnumber">6</span> <span class="scilabnumber">7</span> <span class="scilabnumber">8</span><span class="scilabopenclose">]</span>
+
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>
+   <span class="scilabnumber">2</span>     <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>
+   <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>
+   <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>     <span class="scilabnumber">7</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+
+<span class="scilabcomment">// Only one matching possibility case: how to make 4 identical plots in 4 manners...</span>
+<span class="scilabcomment">// x is 1x4 (vector) and y is 4x5 (non square matrix)</span>
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">221</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabid">t</span> <span class="scilabopenclose">[</span><span class="scilabnumber">8</span><span class="scilabdefault">;</span><span class="scilabnumber">9</span><span class="scilabdefault">;</span><span class="scilabnumber">10</span><span class="scilabdefault">;</span><span class="scilabnumber">12</span><span class="scilabopenclose">]</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">222</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabid">t</span> <span class="scilabopenclose">[</span><span class="scilabnumber">8</span><span class="scilabdefault">;</span><span class="scilabnumber">9</span><span class="scilabdefault">;</span><span class="scilabnumber">10</span><span class="scilabdefault">;</span><span class="scilabnumber">12</span><span class="scilabopenclose">]</span><span class="scilabopenclose">]</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">223</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabid">t</span> <span class="scilabopenclose">[</span><span class="scilabnumber">8</span><span class="scilabdefault">;</span><span class="scilabnumber">9</span><span class="scilabdefault">;</span><span class="scilabnumber">10</span><span class="scilabdefault">;</span><span class="scilabnumber">12</span><span class="scilabopenclose">]</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<a class="scilabmacro" href="subplot.html">subplot</a><span class="scilabopenclose">(</span><span class="scilabnumber">224</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">x</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabid">t</span> <span class="scilabopenclose">[</span><span class="scilabnumber">8</span><span class="scilabdefault">;</span><span class="scilabnumber">9</span><span class="scilabdefault">;</span><span class="scilabnumber">10</span><span class="scilabdefault">;</span><span class="scilabnumber">12</span><span class="scilabopenclose">]</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span></pre></div>
+        <div rel='tooltip' title='x=[5 6 7 8]<br />            <br />            t=[1     1     1     1<br />            2     3     4     5<br />            3     4     5     6<br />            4     5     6     7];<br />            <br />            // Only one matching possibility case : how to make 4 identical plots in 4 manners...<br />            // x is 1x4 (vector) and y is 4x5 (non square matrix)<br />            subplot(221);<br />            plot(x&#039;,[t [8;9;10;12]]);<br />            subplot(222);<br />            plot(x&#039;,[t [8;9;10;12]]);<br />            subplot(223);<br />            plot(x&#039;,[t [8;9;10;12]]);<br />            subplot(224);<br />            plot(x&#039;,[t [8;9;10;12]]);'><img src='/docs/5.5.2/en_US/plot_12.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span>
+
+<span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>
+   <span class="scilabnumber">2</span>     <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>
+   <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>
+   <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>     <span class="scilabnumber">7</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+
+<span class="scilabcomment">//Special case 2</span>
+<span class="scilabcomment">// Case where only x or y is a square matrix</span>
+<span class="scilabcomment">//x : matrix (t) and y  : vector ([1 2 3 4])</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span> <span class="scilabnumber">2</span> <span class="scilabnumber">3</span> <span class="scilabnumber">4</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// equivalent to plot(t,[1 1 1 1;2 2 2 2;3 3 3 3;4 4 4 4])</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span><span class="scilabdefault">;</span><span class="scilabnumber">2</span><span class="scilabdefault">;</span><span class="scilabnumber">3</span><span class="scilabdefault">;</span><span class="scilabnumber">4</span><span class="scilabopenclose">]</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// the same plot, but here Y needs to be transposed</span></pre></div>
+        <div rel='tooltip' title='t=[1     1     1     1<br />            2     3     4     5<br />            3     4     5     6<br />            4     5     6     7];<br />            <br />            //Special case 2<br />            // Case where only x or y is a square matrix<br />            //x : matrix (t) and y  : vector ([1 2 3 4])<br />            plot(t,[1 2 3 4]&#039;) // equivalent to plot(t,[1 1 1 1;2 2 2 2;3 3 3 3;4 4 4 4])'><img src='/docs/5.5.2/en_US/plot_13.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><span class="scilabid">t</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>     <span class="scilabnumber">1</span>
+   <span class="scilabnumber">2</span>     <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>
+   <span class="scilabnumber">3</span>     <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>
+   <span class="scilabnumber">4</span>     <span class="scilabnumber">5</span>     <span class="scilabnumber">6</span>     <span class="scilabnumber">7</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+<a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">cols</span> <span class="scilaboperator">=</span> <span class="scilabnumber">1</span><span class="scilabspecial">:</span><span class="scilabnumber">4</span><span class="scilabdefault">;</span>
+
+<span class="scilabcomment">// cols is transposed : notice the priority given to the columns treatment</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">,</span> <span class="scilabid">cols</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// equivalent to plot(t</span><span class="scilabcomment">&#0039;</span><span class="scilabcomment">,[1 1 1 1;2 2 2 2;3 3 3 3;4 4 4 4])</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabid">t</span><span class="scilaboperator">&#0039;</span><span class="scilabdefault">,</span> <span class="scilabid">cols</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// the same plot</span></pre></div>
+        <div rel='tooltip' title='t=[1     1     1     1<br />            2     3     4     5<br />            3     4     5     6<br />            4     5     6     7];<br />            clf();<br />            cols = 1:4;<br />            <br />            // cols is transposed : notice the priority given to the columns treatment<br />            plot(t&#039;,cols&#039;) // the same plot'><img src='/docs/5.5.2/en_US/plot_14.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabcomment">// y is a function defined by..</span>
+<span class="scilabcomment">// ..a primitive</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabspecial">:</span><span class="scilabnumber">0.1</span><span class="scilabspecial">:</span><span class="scilabnumber">10</span><span class="scilabdefault">,</span><a class="scilabcommand" href="sin.html">sin</a><span class="scilabopenclose">)</span> <span class="scilabcomment">// equivalent to plot(1:0.1:10,sin(1:0.1:10))</span></pre></div>
+        <div rel='tooltip' title='plot(1:0.1:10,sin)'><img src='/docs/5.5.2/en_US/plot_15.png'/></div>
+        <div class="programlisting"><pre class="scilabcode"><a class="scilabmacro" href="clf.html">clf</a><span class="scilabopenclose">(</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabcomment">// ..a macro:</span>
+<a class="scilabcommand" href="deff.html">deff</a><span class="scilabopenclose">(</span><span class="scilabstring">&#0039;</span><span class="scilabstring">[y]=toto(x)</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">y=x.*x</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span>
+<span class="scilabmacro">plot</span><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabspecial">:</span><span class="scilabnumber">10</span><span class="scilabdefault">,</span><span class="scilabid">toto</span><span class="scilabopenclose">)</span></pre></div>
+        <div rel='tooltip' title='deff(&#039;[y]=toto(x)&#039;,&#039;y=x.*x&#039;)<br />            plot(1:10,toto)'><img src='/docs/5.5.2/en_US/plot_16.png'/></div></div>
+    <div class="refsection"><h3 class="title">See Also</h3>
+        <ul class="itemizedlist"><li class="member"><a href="plot2d.html" class="link">plot2d</a> &#8212; 2D plot</li>
+            <li class="member"><a href="surf.html" class="link">surf</a> &#8212; 3D surface plot</li>
+            <li class="member"><a href="scf.html" class="link">scf</a> &#8212; set the current graphic figure
+            (window)</li>
+            <li class="member"><a href="clf.html" class="link">clf</a> &#8212; Clear or reset or reset a figure or a frame uicontrol.</li>
+            <li class="member"><a href="xdel.html" class="link">xdel</a> &#8212; delete a graphics window</li>
+            <li class="member"><a href="delete.html" class="link">delete</a> &#8212; delete  a graphic entity and its children.</li>
+            <li class="member"><a href="LineSpec.html" class="link">LineSpec</a> &#8212; to quickly customize the lines appearance
+            in a plot</li>
+            <li class="member"><a href="GlobalProperty.html" class="link">GlobalProperty</a> &#8212; to customize the objects appearance (curves, surfaces...) in a plot
+            or surf command</li></ul></div>
+
+      
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".comment_button").click(function(){
+
+	var element = $(this);
+	var I = element.attr("id");
+
+	$("#slidepanel"+I).slideToggle(300);
+	$(this).toggleClass("active"); 
+
+	return false;
+	});
+});
+</script>
+<style type="text/css">
+	.comment_button
+	{
+	margin-right:30px; background-color:#355F7C; color:#FFF; border:#333333 solid 1px; padding:3px;font-weight:bold; font-size:11px; font-family:Arial, Helvetica, sans-serif
+	}
+
+	.comment_submit
+	{
+	background-color:#3b59a4; color:#FFFFFF; border:none; font-size:11px; padding:3px; margin-top:3px;
+	}
+	.panel
+	{
+	margin-left:50px; margin-right:50px; margin-bottom:5px; background-color:#D3E7F5; height:15px; padding:6px; width:400px; padding-bottom: 5px;
+	display:none;
+	}
+</style>
+<div id="commentsFooter">
+<h3 class="title">Comments</h3>
+
+</table><br />
+<b>Add a comment:</b>
+<br />
+ <a href='' id='openerloginbottom'>Please login to comment this page.</a><br /><br />
+
+
+      <table width="100%">    <tr><td colspan="3" class="next"><a href="http://bugzilla.scilab.org/enter_bug.cgi?product=Scilab%20software&component=Documentation%20pages" class="ulink">Report an issue</a></td></tr>
+<tr>
+          <td width="30%">
+            <span class="previous"><a href="paramfplot2d.html">&lt;&lt; paramfplot2d</a></span>
+
+          </td>
+          <td width="40%" class="center">
+            <span class="top"><a href="section_2ffb0b90d70b48bab28bd7dcd2267872.html">2d_plot</a></span>
+
+          </td>
+          <td width="30%" class="next" align="right">
+            <span class="next"><a href="plot2d.html">plot2d &gt;&gt;</a></span>
+
+          </td>
+      </tr></table>
+      <hr />
+    </div>
+
+  </div>
+
+
+  <div id="myFooter">
+    <table width="100%"><tr><td>
+          <b><a href="http://www.scilab-enterprises.com/">Scilab Enterprises</a></b><br />Copyright (c) 2011-2017 (Scilab Enterprises)<br />Copyright (c) 1989-2012 (INRIA)<br />Copyright (c) 1989-2007 (ENPC)<br />with <a href="http://www.scilab.org/communities/developer_zone/contribute/contributors_list">contributors</a>
+          </td><td align="right">
+          Last updated:<br /><span class="generationdate">Wed Apr 01 10:13:56 CEST 2015</span>
+          <br /><br /><br />
+        </td>
+    </tr></table>
+
+  </div>
+</div>
+
+  </body>
+</html>
