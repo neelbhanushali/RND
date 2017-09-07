@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML2CANVAS</title>
+	<style type="text/css">
+		#pic {
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="pic">
+		<p>asdf</p>
+		<hr>
+		<p>jfjf</p>
+	</div>
+	<button id="btn">click</button>
+	<div id="op"></div>
+	<a id="image" download></a>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+	<script type="text/javascript">
+		$("#btn").on("click", function(event) {
+			event.preventDefault();
+			html2canvas($("#pic"), {
+				allowTaint: true,
+				taintTest: false,
+				onrendered: function(canvas) {
+					// document.body.appendChild(canvas);
+					$("#op").html("").append(canvas);
+
+					$("#image").attr("href", canvas.toDataURL("image/png"));
+					$("#image")[0].click();
+				}
+			});
+		});
+	</script>
+</body>
+</html>
